@@ -7,11 +7,19 @@ import App from "./components/App";
 import movies from "./reducers";
 import reportWebVitals from "./reportWebVitals";
 
-// createStore is a function given by redux and it takes an argument which will be a reducer
+// createStore is a function given by redux and it takes an argument movies which will be a reducer function
 const store = createStore(movies);
 console.log("Store", store);
 // Accessing the getState object from store object
-console.log("State", store.getState());
+console.log("Before State", store.getState());
+
+// the dispatch function is provided by redux, which is used to dispatch action to reducer and in the end the store.
+store.dispatch({
+  type: "ADD_MOVIES",
+  movies: [{ name: "Iron Man " }],
+});
+
+console.log("After State", store.getState());
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

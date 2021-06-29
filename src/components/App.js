@@ -16,8 +16,9 @@ function App() {
         </div>
 
         <div className="list">
-          {data.map((movie) => (
-            <MovieCard movie={movie} />
+          {/* In map function we get two arguments, 1. the movie during iteration and 2. the index of the movie in the array of movies, which we are using as key for movie identification */}
+          {data.map((movie, index) => (
+            <MovieCard movie={movie} key={index} />
           ))}
         </div>
       </div>
