@@ -11,17 +11,18 @@ import reportWebVitals from "./reportWebVitals";
 const store = createStore(movies);
 console.log("Store", store);
 // Accessing the getState object from store object
-console.log("Before State", store.getState());
+// console.log("Before State", store.getState());
 
-// the dispatch function is provided by redux, which is used to dispatch action to reducer and in the end the store.
-store.dispatch({
-  type: "ADD_MOVIES",
-  movies: [{ name: "Iron Man " }],
-});
+// // the dispatch function is provided by redux, which is used to dispatch action to reducer and in the end the store.
+// store.dispatch({
+//   type: "ADD_MOVIES",
+//   movies: [{ name: "Iron Man " }],
+// });
 
-console.log("After State", store.getState());
+// console.log("After State", store.getState());
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// Passing the store to component App as props
+ReactDOM.render(<App store={store} />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
