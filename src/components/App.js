@@ -4,6 +4,7 @@ import "../index.css";
 import { data } from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "../MovieCard";
+import { addMovies } from "../actions";
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,11 +19,8 @@ class App extends React.Component {
       this.forceUpdate();
     });
     // make API calls
-    // dispatch action to store with movies from data file
-    store.dispatch({
-      type: "ADD_MOVIES",
-      movies: data,
-    });
+    // dispatch action to store with movies from data file using action creators
+    store.dispatch(addMovies(data));
 
     // displays the new updated state
     console.log("State", this.props.store.getState());
