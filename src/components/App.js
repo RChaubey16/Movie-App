@@ -27,8 +27,8 @@ class App extends React.Component {
   }
 
   render() {
-    // gets movies from the state in store
-    const movies = this.props.store.getState();
+    // gets list of movies from the state in store which is a JS object
+    const { list } = this.props.store.getState();
     return (
       <div className="App">
         <Navbar />
@@ -41,7 +41,7 @@ class App extends React.Component {
 
           <div className="list">
             {/* In map function we get two arguments, 1. the movie during iteration and 2. the index of the movie in the array of movies, which we are using as key for movie identification */}
-            {movies.map((movie, index) => (
+            {list.map((movie, index) => (
               <MovieCard movie={movie} key={index} />
             ))}
           </div>
