@@ -1,10 +1,16 @@
 // importing ADD_MOVIES action type from actions
-import { ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE } from "../actions";
+import {
+  ADD_MOVIES,
+  ADD_FAVOURITE,
+  REMOVE_FAVOURITE,
+  SET_SHOW_FAVOURITES,
+} from "../actions";
 
 // creating a object
 const initialState = {
   list: [],
   favourites: [],
+  showFavourites: false,
 };
 
 // reducer function
@@ -41,6 +47,12 @@ export default function movies(state = initialState, action) {
       return {
         ...state,
         favourites: FilteredArray,
+      };
+
+    case SET_SHOW_FAVOURITES:
+      return {
+        ...state,
+        showFavourites: action.val,
       };
 
     default:
