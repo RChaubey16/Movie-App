@@ -1,5 +1,5 @@
 // importing ADD_MOVIES action type from actions
-import { ADD_MOVIES, ADD_FAVOURITE } from "../actions";
+import { ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE } from "../actions";
 
 // creating a object
 const initialState = {
@@ -32,6 +32,15 @@ export default function movies(state = initialState, action) {
       return {
         ...state,
         favourites: [action.movie, ...state.favourites],
+      };
+
+    case REMOVE_FAVOURITE:
+      const FilteredArray = state.favourites.filter(
+        (movie) => movie.Title !== action.movie.Title
+      );
+      return {
+        ...state,
+        favourites: FilteredArray,
       };
 
     default:
