@@ -13,7 +13,7 @@ class App extends React.Component {
 
     // subscribe is used to subscribe to store, to get the upto date state from store incase any changes occurs.
     store.subscribe(() => {
-      console.log("updated", store.getState());
+      console.log("UPDATED", store.getState());
       // this.forceUpdate() is used to forcefully re-render the App component. It should not be used as it is not a good practice.
       // But right now its handy for us
       this.forceUpdate();
@@ -23,12 +23,12 @@ class App extends React.Component {
     store.dispatch(addMovies(data));
 
     // displays the new updated state
-    console.log("State", this.props.store.getState());
+    console.log("STATE", this.props.store.getState());
   }
 
   isMovieFavourite = (movie) => {
-    const { favourites } = this.props.store.getState();
-    const index = favourites.indexOf(movie);
+    const { movies } = this.props.store.getState(); // getting movies from state
+    const index = movies.favourites.indexOf(movie);
 
     if (index !== -1) {
       return true;
@@ -43,8 +43,12 @@ class App extends React.Component {
 
   render() {
     // gets list of movies from the state in store which is a JS object
-    const { list, favourites, showFavourites } = this.props.store.getState();
+    const { movies } = this.props.store.getState(); // State contains: { movies: {...}, search: {}}
 
+    // the movies object in store contains list, favourites, showFavourites
+    const { list, favourites, showFavourites } = movies;
+
+    console.log("RENDER", this.props.store.getState());
     const displayMovies = showFavourites ? favourites : list;
 
     return (

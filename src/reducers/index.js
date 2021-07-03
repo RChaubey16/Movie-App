@@ -14,7 +14,8 @@ const initialState = {
 };
 
 // reducer function
-export default function movies(state = initialState, action) {
+export function movies(state = initialState, action) {
+  console.log("MOVIES REDUCER");
   // checking the type of function to perform a specific operation
   // if (action.type === ADD_MOVIES) {
   //   return {
@@ -58,4 +59,29 @@ export default function movies(state = initialState, action) {
     default:
       return state;
   }
+}
+
+// search Reducer
+
+const initialSearchState = {
+  result: {},
+};
+
+export function search(state = initialSearchState, action) {
+  console.log("SEARCH REDUCER");
+  return state;
+}
+
+// Creating Root Reducer because we want to add multiple reducers to our app and createStore() function only takes in reducer, Hence the Root-Reducer
+
+const initialRootState = {
+  movies: initialState, // Getting the initial Movie State
+  search: initialSearchState, // Getting the initial Search State
+};
+
+export default function rootReducer(state = initialRootState, action) {
+  return {
+    movies: movies(state.movies, action), // Calling moviesReducer
+    search: search(state.search, action), // Calling searchReducer
+  };
 }

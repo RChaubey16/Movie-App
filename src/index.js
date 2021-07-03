@@ -4,11 +4,12 @@ import { createStore } from "redux";
 
 import "./index.css";
 import App from "./components/App";
-import movies from "./reducers";
+
+import rootReducer from "./reducers";
 import reportWebVitals from "./reportWebVitals";
 
 // createStore is a function given by redux and it takes an argument movies which will be a reducer function
-const store = createStore(movies);
+const store = createStore(rootReducer);
 console.log("Store", store);
 // Accessing the getState object from store object
 // console.log("Before State", store.getState());
