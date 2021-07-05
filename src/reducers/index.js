@@ -1,4 +1,7 @@
-// importing ADD_MOVIES action type from actions
+// importing combineReducers() from redux
+import { combineReducers } from "redux";
+
+// importing ADD_MOVIES and other action types from actions
 import {
   ADD_MOVIES,
   ADD_FAVOURITE,
@@ -79,9 +82,14 @@ const initialRootState = {
   search: initialSearchState, // Getting the initial Search State
 };
 
-export default function rootReducer(state = initialRootState, action) {
-  return {
-    movies: movies(state.movies, action), // Calling moviesReducer
-    search: search(state.search, action), // Calling searchReducer
-  };
-}
+// export default function rootReducer(state = initialRootState, action) {
+//   return {
+//     movies: movies(state.movies, action), // Calling moviesReducer
+//     search: search(state.search, action), // Calling searchReducer
+//   };
+// }
+
+export default combineReducers({
+  movies: movies, // Redux internally calls movies and search reducers and returns it to state in store.
+  search: search,
+});
