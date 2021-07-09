@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 import "./index.css";
 import App from "./components/App";
@@ -8,8 +8,30 @@ import App from "./components/App";
 import rootReducer from "./reducers";
 import reportWebVitals from "./reportWebVitals";
 
+// middleware method 1
+// destructuring the args in function
+// const logger = function ({ dispatch, getState }) {
+//   return function (next) {
+//     return function (action) {
+//       // middleware code
+//       console.log("ACTION_TYPE = ", action.type);
+//       next(action);
+//     };
+//   };
+// };
+
+// middleware method 2
+const logger =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    // middleware code
+    console.log("ACTION_TYPE = ", action.type);
+    next(action);
+  };
+
 // createStore is a function given by redux and it takes an argument movies which will be a reducer function
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 console.log("Store", store);
 // Accessing the getState object from store object
 // console.log("Before State", store.getState());
