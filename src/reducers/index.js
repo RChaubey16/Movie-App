@@ -7,6 +7,8 @@ import {
   ADD_FAVOURITE,
   REMOVE_FAVOURITE,
   SET_SHOW_FAVOURITES,
+  ADD_SEARCH_RESULT,
+  ADD_MOVIE_TO_LIST,
 } from "../actions";
 
 // creating a object
@@ -32,6 +34,12 @@ export function movies(state = initialState, action) {
   // return state;
 
   switch (action.type) {
+    case ADD_MOVIE_TO_LIST:
+      return {
+        ...state,
+        list: [action.movie, ...state.list],
+      };
+
     case ADD_MOVIES:
       return {
         ...state,
@@ -68,11 +76,26 @@ export function movies(state = initialState, action) {
 
 const initialSearchState = {
   result: {},
+  showSearchResults: false,
 };
 
 export function search(state = initialSearchState, action) {
-  console.log("SEARCH REDUCER");
-  return state;
+  switch (action.type) {
+    case ADD_SEARCH_RESULT:
+      return {
+        ...state,
+        result: action.movie,
+        showSearchResults: true,
+      };
+
+    case ADD_MOVIE_TO_LIST:
+      return {
+        ...state,
+        showSearchResults: false,
+      };
+    default:
+      return state;
+  }
 }
 
 // Creating Root Reducer because we want to add multiple reducers to our app and createStore() function only takes in reducer, Hence the Root-Reducer

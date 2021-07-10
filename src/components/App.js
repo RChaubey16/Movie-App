@@ -43,7 +43,7 @@ class App extends React.Component {
 
   render() {
     // gets list of movies from the state in store which is a JS object
-    const { movies } = this.props.store.getState(); // State contains: { movies: {...}, search: {}}
+    const { movies, search } = this.props.store.getState(); // State contains: { movies: {...}, search: {}}
 
     // the movies object in store contains list, favourites, showFavourites
     const { list, favourites, showFavourites } = movies;
@@ -53,7 +53,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={search} />
 
         <div className="main">
           <div className="tabs">

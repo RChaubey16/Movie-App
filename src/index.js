@@ -30,8 +30,20 @@ const logger =
     next(action);
   };
 
+const thunk =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    // middleware code
+    if (typeof action === "function") {
+      action(dispatch);
+      return;
+    }
+    next(action);
+  };
+
 // createStore is a function given by redux and it takes an argument movies which will be a reducer function
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 console.log("Store", store);
 // Accessing the getState object from store object
 // console.log("Before State", store.getState());
