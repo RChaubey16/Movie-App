@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 
@@ -56,8 +56,29 @@ console.log("Store", store);
 
 // console.log("After State", store.getState());
 
+// Creating Context Provider class
+class Provider extends React.Component {
+  render() {
+    const { store } = this.props;
+    return (
+      <Provider value={store}>
+        {/* Rendering the childern of component between  <StoreContext.Provider value={store}> </StoreContext.Provider>*/}
+        {this.props.children}
+      </Provider>
+    );
+  }
+}
+
+export const StoreContext = createContext();
+
 // Passing the store to component App as props
-ReactDOM.render(<App store={store} />, document.getElementById("root"));
+ReactDOM.render(
+  // using context Provider
+  <StoreContext.Provider value={store}>
+    <App store={store} />
+  </StoreContext.Provider>,
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
