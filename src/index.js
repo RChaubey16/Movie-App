@@ -56,27 +56,27 @@ console.log("Store", store);
 
 // console.log("After State", store.getState());
 
+export const StoreContext = createContext();
+
 // Creating Context Provider class
 class Provider extends React.Component {
   render() {
     const { store } = this.props;
     return (
-      <Provider value={store}>
+      <StoreContext.Provider value={store}>
         {/* Rendering the childern of component between  <StoreContext.Provider value={store}> </StoreContext.Provider>*/}
         {this.props.children}
-      </Provider>
+      </StoreContext.Provider>
     );
   }
 }
 
-export const StoreContext = createContext();
-
 // Passing the store to component App as props
 ReactDOM.render(
   // using context Provider
-  <StoreContext.Provider value={store}>
-    <App store={store} />
-  </StoreContext.Provider>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 
